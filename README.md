@@ -1,3 +1,3 @@
-# X Sosyal Medya Platformu 
+# X Sosyal 
 
-- moment kütüphanesi kullanıldı.
+- moment 
