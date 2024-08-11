@@ -1,0 +1,454 @@
+@import "auth";
+@import "responsive";
+@import "loading";
+@import "user";
+
+/* text font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: white;
+  font-family: "Poppins";
+}
+
+// button features
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+button:hover {
+  filter: brightness(60%);
+}
+
+/* anasayfa stilleri */
+#feed {
+  min-height: 100vh;
+  font-family: "Poppins";
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 600px 1fr;
+
+  @include sm {
+    grid-template-columns: 1fr 600px 1fr !important;
+  }
+}
+
+/* feed area */
+main {
+  height: 100vh;
+  border: 1px solid gray;
+  overflow: auto;
+
+  header {
+    padding: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 1px solid rgb(60, 60, 60);
+  }
+
+  #post-tweet {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgb(60, 60, 60);
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .input-area {
+      width: 100%;
+      input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 20px;
+      }
+      .button-area {
+        display: flex;
+        justify-content: end;
+
+        button {
+          border-radius: 60px;
+          background: $blue;
+          color: white;
+          padding: 10px 20px;
+          font-size: 15px;
+          &:hover {
+            background: rgb(75, 186, 255);
+          }
+        }
+      }
+    }
+  }
+
+  &::-webkit-scrollbar{
+    background: black;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 10px;
+  }
+}
+
+/* left area */
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+  @include xs {
+
+  }
+
+  @media (min-width: 1000px) {
+    align-items: end;
+    margin-right: 50px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+
+    @include md {
+      align-items: center;
+    }
+
+    li {
+      display: flex;
+      font-size: 20px;
+      gap: 10px;
+      padding: 20px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.4s;
+      margin: 5px;
+
+      &:hover {
+        background: rgb(60, 60, 60);
+      }
+      &:last-child {
+        background: $blue;
+        padding: 10px 10px;
+
+        @include sm{
+          padding: 10px 5px;
+        }
+      }
+    }
+
+    img {
+      width: 80px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    span {
+      white-space: nowrap;
+      @include md {
+        display: none;
+      }
+    }
+
+    i {
+      @include md {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .user-info {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 0 10px;
+
+    @include md {
+      flex-direction: column;
+      align-items: end;
+    }
+
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+
+      @include md {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    button {
+      font-size: 14px;
+      padding: 4px 10px;
+      margin-top: 5px;
+      display: flex;
+      gap: 5px;
+
+      @include md {
+        font-size: 18px;
+        padding: 6px 16px;
+      }
+    }
+
+    span,
+    p {
+      white-space: nowrap;
+      @include md {
+        display: none;
+      }
+    }
+  }
+}
+
+.tweets-area {
+  display: flex;
+  flex-direction: column;
+}
+.tweet {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: 1px solid rgb(60, 60, 60);
+
+  #user-img {
+    height: 50px;
+    border-radius: 50%;
+
+    @include sm {
+      display: none;
+    }
+  }
+  #mobile-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: none;
+    @include sm{
+        display: block;
+    }
+  }
+
+  .body{
+    width: 100%;
+    margin-top: 10px;
+    
+    // kullanıcı bilgisi
+    .user{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        a{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+
+            p{
+                color: gray;
+                @include sm{
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+    // tweet içeriği
+    .content{
+        margin-top: 10px;
+        text-decoration: none;
+        color: white;
+        img, video{
+            width: 100%;
+            object-fit: cover;
+            max-height: 600px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+    }
+
+  }
+}
+
+// etkileşim butonları
+
+.tweet .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    button{
+        background: none;
+        color: white;
+
+
+        @include sm {
+            font-size: 15px;
+        }
+        &:nth-child(1){
+            &:hover{
+                background: #00abeeab;
+            }
+        }
+        &:nth-child(2){
+            &:hover{
+                background: rgba(0, 128, 0, 0.516);
+            }
+        }
+        &:nth-child(3){
+            &:hover{
+                background: rgba(255, 0, 0, 0.681);
+            }
+        }
+        &:nth-child(4){
+            &:hover{
+                background: #00abeeab;
+            }
+        }
+    }
+}
+
+aside {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 50px;
+  @include md {
+    display: none;
+
+  }
+
+  form{
+    background-color: rgb(40, 40, 40);
+    padding: 5px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: 40px;
+    color: gray;
+  }
+
+  input{
+    background: none;
+    border: none;
+    outline: none;
+    color: rgba(215, 211, 211, 0.448);
+    font-family: 'poppins';
+  }
+}
+
+// detay sayfası
+.nav{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  i{
+    font-size: 21px;
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+
+    &:hover{
+      background: rgba(128, 128, 128, 0.479);
+    }
+  }
+
+  h4{
+    font-size: 20px;
+  }
+}
+
+.detail-tweet{
+  padding: 20px;
+
+  .user #userimg{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  .content{
+    margin-top: 30px !important;
+  }
+
+  .info{
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+
+    p:nth-child(1){
+      color: gray;
+    }
+    p:nth-child(2){
+      display: flex;
+      gap: 4px;
+    span:nth-child(1){
+        color: gray;
+      }
+    }
+  }
+}
+
+#comment-form{
+  display: flex;
+  padding: 20px;
+  gap: 10px;
+  align-items: center;
+
+  img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
+  input{
+    flex: 1;
+    background: #000;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 20px;
+  }
+
+  button{
+    background: $blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+  }
+}

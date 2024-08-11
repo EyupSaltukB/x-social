@@ -1,0 +1,76 @@
+@import "responsive";
+
+$blue : #00acee;
+
+
+#auth-page{
+    min-height: 100vh;
+    background : rgb(30, 30, 30);
+    display: grid;
+    place-items: center;
+}
+
+#auth-page form{
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 500px;
+    padding: 60px 80px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    gap: 25px;
+
+    @include sm{
+        width: 100%;
+        min-width: unset;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    #xlogo{
+        height: 100px;
+        width: 100px;
+    }
+    
+    div{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    input{
+        margin-top: 5px;
+        padding: 5px;
+        border-radius: 10px;
+        border: solid 1px gray;
+        outline: none;
+        &:focus {
+            box-shadow:  0 0 10px rgb(62, 62, 62);
+        }
+    }
+
+    button{
+        width: 100%;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 8px;
+        font-family: 'Poppins';
+    }
+
+    .name-warning,
+    .pass-warning{
+        // hata olmadığında input kaymalarını engellemek için
+        height: 30px;
+
+        p{
+            width: 100%;
+            background: #d19191;
+            padding: 0px 7px;
+            margin-top: 3px;
+            border-radius: 10px;
+            color: black;
+        }
+    }
+}
